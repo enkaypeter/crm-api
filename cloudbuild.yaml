@@ -1,31 +1,31 @@
-# .cloudbuild.yaml
+substitutions:
+  _PROJECT_ID: $PROJECT_ID
+
 steps:
   # Step 1: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - build
       - '-t'
-      - 'gcr.io/$PROJECT_ID/fincrm-api'
+      - 'gcr.io/${_PROJECT_ID}/fincrm-api'
       - '.'
 
-  # Step 2: Push image to Google Container Registry
+  # Step 2: Push image to GCR
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - push
-      - 'gcr.io/$PROJECT_ID/fincrm-api'
+      - 'gcr.io/${_PROJECT_ID}/fincrm-api'
 
-  # Step 3: Deploy to Cloud Run using YAML config
+  # Step 3: Patch cloudrun.yaml and deploy
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
+    entrypoint: bash
     args:
-      - run
-      - services
-      - replace
-      - cloudrun.yaml
-      - '--region=europe-west1'
-      - '--platform=managed'
-
-timeout: 1200s
+      - '-c'
+      - |
+        sed "s|gcr.io/PROJECT_ID_PLACEHOLDER/fincrm-api|gcr.io/${_PROJECT_ID}/fincrm-api|g" cloudrun.yaml > cloudrun.patched.yaml
+        gcloud run services replace cloudrun.patched.yaml --region=europe-west1 --platform=managed
 
 images:
-  - 'gcr.io/$PROJECT_ID/fincrm-api'
+  - 'gcr.io/${_PROJECT_ID}/fincrm-api'
+
+timeout: 1200s

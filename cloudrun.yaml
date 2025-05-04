@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: gcr.io/$PROJECT_ID/fincrm-api
+          image: gcr.io/PROJECT_ID_PLACEHOLDER/fincrm-api
           ports:
             - containerPort: 8080
           env:
@@ -32,8 +32,6 @@ spec:
                   key: latest
         - name: pdp
           image: permitio/pdp-v2:latest
-          env:
-            - name: PDP_API_KEY
           env:
             - name: PDP_API_KEY
               valueFrom:
