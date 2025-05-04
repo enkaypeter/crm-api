@@ -22,12 +22,13 @@ app.use("/admin", adminRouter);
 
 export default app;
 
+await seedPermitData(); 
+
 const PORT = process.env.PORT || 8080;
 
 if (process.env.NODE_ENV !== "test") {
   (async () => {
     try {
-      await seedPermitData(); 
       app.listen(PORT, () => {
         console.log(`🚀 Server is running on port ${PORT}`);
       });
