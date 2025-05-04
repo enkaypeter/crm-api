@@ -12,4 +12,4 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Start the server
-CMD ["node", "src/app.js"]
+CMD ["bash", "-c", "node scripts/syncPermitData.js && node src/app.js"]
