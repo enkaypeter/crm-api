@@ -9,6 +9,8 @@ spec:
       containers:
         - name: api
           image: gcr.io/YOUR_PROJECT_ID/fincrm-api
+          ports:
+            - containerPort: 8080
           env:
             - name: PERMIT_PDP_URL
               value: http://localhost:7766
