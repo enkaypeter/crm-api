@@ -1,0 +1,25 @@
+{
+  "name": "crm-api",
+  "version": "0.0.0",
+  "description": "A fintech-style CRM microservice showing fine-grained, declarative role-based access to customer accounts and interactions using Permit.io.",
+  "main": "src/app.js",
+  "author": "nkere-awaji <enkaypeter>",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "bluebird": "^3.7.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "permitio": "^2.7.4",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.1.0",
+    "yaml2json": "^1.0.2"
+  }
+}

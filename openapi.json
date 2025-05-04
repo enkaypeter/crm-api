@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FinCRM AI+Auth API",
+    "version": "1.0.0",
+    "description": "CRM-style API with Permit.io authorization and AI control"
+  },
+  "paths": {
+    "/accounts/{id}": {
+      "get": {
+        "summary": "Get account by ID",
+        "description": "Returns account data if the user is authorized via Permit.io",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Account ID to fetch"
+          },
+          {
+            "in": "header",
+            "name": "x-user-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User ID for simulation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account details returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "owner_id": {
+                      "type": "string"
+                    },
+                    "credit_limit": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "404": {
+            "description": "Account not found"
+          }
+        }
+      }
+    }
+  }
+}
