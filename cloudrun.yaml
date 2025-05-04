@@ -3,7 +3,6 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: fincrm-api
-  namespace: default
 spec:
   template:
     spec:
