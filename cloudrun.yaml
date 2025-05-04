@@ -12,7 +12,7 @@ spec:
             - containerPort: 8080
           env:
             - name: PERMIT_PDP_URL
-              value: http://localhost:7766
+              value: http://pdp:7000
             - name: PERMIT_API_URL
               value: https://api.permit.io/v2
             - name: PERMIT_API_KEY
