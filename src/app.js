@@ -3,6 +3,7 @@ import express from "express";
 import fs from "fs/promises";
 import swaggerUi from "swagger-ui-express";
 import loadUser from "./middleware/loadUser.js";
+import seedPermitData from "../scripts/syncPermitData.js";
 import { accountsRouter, transactionsRouter, adminRouter } from "./routes/index.js";
 
 const app = express();
@@ -21,7 +22,18 @@ app.use("/admin", adminRouter);
 
 export default app;
 
+const PORT = process.env.PORT || 8080;
+
 if (process.env.NODE_ENV !== "test") {
-  const PORT = process.env.PORT;
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  (async () => {
+    try {
+      await seedPermitData(); 
+      app.listen(PORT, () => {
+        console.log(`🚀 Server is running on port ${PORT}`);
+      });
+    } catch (err) {
+      console.error("❌ Failed to seed Permit data:", err);
+      process.exit(1);
+    }
+  })();
 }

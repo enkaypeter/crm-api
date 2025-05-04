@@ -4,7 +4,6 @@ import { users } from "../src/mock/data.js";
 import Promise from "bluebird";
 
 const basePath = `/schema/${config.permit.projectId}/${config.permit.envId}`;
-// const usersFactsPath = `/facts/${config.permit.projectId}/${config.permit.envId}/users`;
 
 
 const assignmentPath = `/facts/${config.permit.projectId}/${config.permit.envId}/role_assignments`;
@@ -157,13 +156,7 @@ async function syncUsersAndRoles() {
 }
 
 
-(async () => {
-  try {
-    await setupRolesAndResourceTypes();
-    await syncUsersAndRoles();
-    console.log("✅ Permit sync completed successfully.");
-  } catch (err) {
-    console.log(err);
-    console.error("❌ Permit sync failed:", err.response?.data || err.message);
-  }
-})();
+export default async function seedPermitData() {
+  await setupRolesAndResourceTypes();
+  await syncUsersAndRoles();
+}
