@@ -11,8 +11,5 @@ RUN yarn install --frozen-lockfile
 # Copy app source
 COPY . .
 
-# Default port
-ENV PORT=3000
-
 # Start the server
 CMD ["node", "src/app.js"]
