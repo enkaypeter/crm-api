@@ -1,0 +1,30 @@
+# cloudrun.yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: fincrm-api
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - name: api
+          image: gcr.io/YOUR_PROJECT_ID/fincrm-api
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PERMIT_PDP_URL
+              value: http://localhost:7000
+            - name: PERMIT_API_KEY
+              value: your-permit-api-key
+        - name: pdp
+          image: permitio/pdp-v2:latest
+          ports:
+            - containerPort: 7000
+          env:
+            - name: PDP_API_KEY
+              value: your-permit-api-key
+            - name: PDP_DEBUG
+              value: "true"
+      timeoutSeconds: 300
+      containerConcurrency: 80
