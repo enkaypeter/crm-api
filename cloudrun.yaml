@@ -29,10 +29,10 @@ spec:
                 secretKeyRef:
                   name: permit-env-id
                   key: latest
-            - name: PORT
-              value: "3000"
         - name: pdp
           image: permitio/pdp-v2:latest
+          env:
+            - name: PDP_API_KEY
           env:
             - name: PDP_API_KEY
               valueFrom:
