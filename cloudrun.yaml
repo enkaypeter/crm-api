@@ -10,20 +10,36 @@ spec:
       containers:
         - name: api
           image: gcr.io/YOUR_PROJECT_ID/fincrm-api
-          ports:
-            - containerPort: 3000
           env:
             - name: PERMIT_PDP_URL
-              value: http://localhost:7000
+              value: http://localhost:7766
+            - name: PERMIT_API_URL
+              value: https://api.permit.io/v2
             - name: PERMIT_API_KEY
-              value: your-permit-api-key
+              valueFrom:
+                secretKeyRef:
+                  name: permit-api-key
+                  key: latest
+            - name: PERMIT_PROJECT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: permit-project-id
+                  key: latest
+            - name: PERMIT_ENV_ID
+              valueFrom:
+                secretKeyRef:
+                  name: permit-env-id
+                  key: latest
+            - name: PORT
+              value: "3000"
         - name: pdp
           image: permitio/pdp-v2:latest
-          ports:
-            - containerPort: 7000
           env:
             - name: PDP_API_KEY
-              value: your-permit-api-key
+              valueFrom:
+                secretKeyRef:
+                  name: permit-api-key
+                  key: latest
             - name: PDP_DEBUG
               value: "true"
       timeoutSeconds: 300
