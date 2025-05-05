@@ -24,6 +24,16 @@ steps:
       - |
         sed "s|gcr.io/PROJECT_ID_PLACEHOLDER/fincrm-api|gcr.io/${_PROJECT_ID}/fincrm-api|g" cloudrun.yaml > cloudrun.patched.yaml
         gcloud run services replace cloudrun.patched.yaml --region=europe-west1 --platform=managed
+  # Step 4: Allow unauthenticated access
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - run
+      - services
+      - add-iam-policy-binding
+      - fincrm-api
+      - --region=europe-west1
+      - --member=allUsers
+      - --role=roles/run.invoker
 
 images:
   - 'gcr.io/${_PROJECT_ID}/fincrm-api'
