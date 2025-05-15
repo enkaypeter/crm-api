@@ -82,3 +82,6 @@ open http://localhost:3000/docs
 
 ## 📝 Submission
 This project is part of the [Permit.io Authorization Challenge](https://dev.to/devteam/join-us-for-the-permitio-authorization-challenge-3000-in-prizes-and-a-mechanical-keyboard-for-5ah), demonstrating externalized authorization in a real-world fintech scenario with an AI-driven decision flow.
+
+## ⚖️ Completion Badge
+![Completion Badge](https://media2.dev.to/dynamic/image/width=192,height=,fit=scale-down,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fbadge%2Fbadge_image%2F374%2FPermit.io_Completion_Badge1.png)
